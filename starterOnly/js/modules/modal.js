@@ -1,9 +1,5 @@
 const modalbg = document.querySelector('.bground');
-const prenom = document.getElementById('first');
-const nom = document.getElementById('last');
-const email = document.getElementById('email');
-const location = document.querySelector('input[name=location]');
-const cg = document.getElementById('checkbox1');
+const modalcontent = document.getElementById('content');
 
 // launch modal form
 export function launchModal () {
@@ -15,12 +11,20 @@ export function closeModal () {
     modalbg.style.display = 'none';
 }
 
-// submit form
-export function submitForm () {
-    validate();
-}
+export function displayFormMessage () {
+    // empty modal content
+    modalcontent.innerHTML = "";
 
+    // create message text elements
+    const modalMessage = document.createElement("div");
+    const modalSuccess = document.createElement("div");
+    const modalButton = document.createElement("button");
 
-function validate() {
-    // verify first name
+    modalMessage.className = "modal-body-flex";
+    // texte "Merci pour votre inscription"
+    messageSuccess.className = "modal-success";
+    messageSuccess.innerText = "Merci pour votre inscription";
+    // bouton "Fermer"
+    modalButton.className = "btn-submit";
+    modalButton.innerText = "Fermer";
 }
