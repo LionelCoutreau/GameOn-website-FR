@@ -28,13 +28,34 @@ form.addEventListener('submit', event => {
     event.preventDefault();
 
     // reset data errors
-    formData.setAttribute("data-error", "");
-    formData.setAttribute("data-error-visible", "false");
+    formData.forEach(element => {
+        element.setAttribute("data-error", "");
+        element.setAttribute("data-error-visible", "false");
+    });
 
     const result = validate();
 
     if (result)
     {
+        const first = document.getElementById("first");
+        const last = document.getElementById("last");
+        const email = document.getElementById("email");
+        const birthdate = document.getElementById("birthdate");
+        const quantity = document.getElementById("quantity");
+        const location = document.querySelector('input[name="location"]:checked');
+        const conditions = document.getElementById("checkbox1");
+        const information = document.getElementById("checkbox2");
+        const json = {
+            "first":first.value,
+            "last":last.value,
+            "email":email.value,
+            "birthdate":birthdate.value,
+            "quantity":quantity.value,
+            "location":location.value,
+            "conditions":conditions.checked,
+            "information":information.checked
+        };
+        console.log(json);
         displayFormMessage();
     }
     else
@@ -43,7 +64,7 @@ form.addEventListener('submit', event => {
     }
 });
 
-formDataInput.addEventListener('input', event => {
+formDataInput.forEach(element => element.addEventListener('input', event => {
     event.preventDefault();
-    validateElement(this.getAttribute("name"));
-});
+    validateElement(element.getAttribute("name"));
+}));
