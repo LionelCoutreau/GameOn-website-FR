@@ -2,6 +2,7 @@
 const first = document.getElementById("first");
 const last = document.getElementById("last");
 const email = document.getElementById("email");
+const birthdate = document.getElementById("birthdate");
 const quantity = document.getElementById("quantity");
 const location = document.getElementsByName("location");
 const conditions = document.getElementById("conditions");
@@ -39,6 +40,10 @@ export function validateElement(elementName)
         case "email" :
             result = verifyEmail();
             break;
+        // "Date de naissance"
+        case "birthdate" :
+            result = verifyBirthdate();
+            break;
         // "À combien de tournois GameOn avez-vous déjà participé ?"
         case "quantity" :
             result = verifyQuantity();
@@ -75,6 +80,13 @@ function verifyEmail()
 {
     // verify if valid email
     return isEmailValid(email);
+}
+
+// verify "birthdate" field
+function verifyBirthdate()
+{
+    // verify if valid email
+    return isDateValid(birthdate);
 }
 
 // verify "quantity" field
@@ -131,6 +143,22 @@ function isEmailValid(element)
     return result;
 }
 
+// verify if date is valid
+function isDateValid(element)
+{
+    let result = true;
+    const validRegex = /^([0-9]){2}\/([0-9]){2}\/([0-9]{4})$/;
+    const formDataErr = element.parentElement;
+
+    if (!element.value.match(validRegex)) {
+        formDataErr.setAttribute("data-error", "Veuillez entrer une date valide");
+        formDataErr.setAttribute("data-error-visible", "true");
+        result = false;
+    }
+
+    return result;
+}
+
 
 // verify if value is numeric
 function isNumeric(element)
@@ -152,16 +180,22 @@ function isNumeric(element)
 function isOneRadioChecked(elementsGroup)
 {
     let result = true;
+    let isOneChecked = false;
 
     elementsGroup.forEach(element => {
-        const formDataErr = element.parentElement;
-
-        if (!element.checked) {
-            formDataErr.setAttribute("data-error", "Vous devez choisir une option.");
-            formDataErr.setAttribute("data-error-visible", "true");
-            result = false;
+        if (element.checked) {
+            isOneChecked = true;
         }
     });
+
+    if(!isOneChecked)
+    {
+        const formDataErr = elementsGroup[0].parentElement;
+
+        formDataErr.setAttribute("data-error", "Vous devez choisir une option.");
+        formDataErr.setAttribute("data-error-visible", "true");
+        result = false;
+    }
 
     return result;
 }

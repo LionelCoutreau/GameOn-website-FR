@@ -50,26 +50,26 @@
         <div class="content">
           <span class="close"></span>
           <div class="modal-body">
-            <form name="reserve" action="index.html" method="get">
+            <form name="reserve" action="index.html" method="get" novalidate>
               <div class="formData">
                 <label>Prénom</label><br>
-                <input class="text-control" type="text" id="first" name="first" />
+                <input class="text-control" type="text" id="first" name="first" required />
               </div>
               <div class="formData">
                 <label>Nom</label><br>
-                <input class="text-control" type="text" id="last" name="last" />
+                <input class="text-control" type="text" id="last" name="last" required />
               </div>
               <div class="formData">
                 <label>E-mail</label><br>
-                <input class="text-control" type="email" id="email" name="email" />
+                <input class="text-control" type="email" id="email" name="email" required />
               </div>
               <div class="formData">
                 <label>Date de naissance</label><br>
-                <input class="text-control" type="date" id="birthdate" name="birthdate" />
+                <input class="text-control" type="date" id="birthdate" name="birthdate" required />
               </div>
               <div class="formData">
                 <label>À combien de tournois GameOn avez-vous déjà participé ?</label><br>
-                <input type="number" class="text-control" id="quantity" name="quantity" min="0" max="99">
+                <input type="number" class="text-control" id="quantity" name="quantity" min="0" max="99" required>
               </div>
               
               <div class="formData">
@@ -106,7 +106,7 @@
                 </label>
               </div>
               <div class="formData">
-                <input class="checkbox-input" type="checkbox" id="checkbox1" name="conditions" />
+                <input class="checkbox-input" type="checkbox" id="checkbox1" name="conditions" required />
                 <label class="checkbox2-label" for="checkbox1">
                   <span class="checkbox-icon"></span>
                   J'ai lu et accepté les conditions d'utilisation.
