@@ -1,5 +1,5 @@
 import { editNav } from './modules/navigation.js'
-import { launchModal, closeModal } from './modules/modal.js'
+import { launchModal, closeModal, displayFormMessage } from './modules/modal.js'
 import { validate, validateElement } from './modules/validation.js'
 import { saveFormValues, restoreFormValues } from './modules/localstorage.js'
 
@@ -10,6 +10,7 @@ const toggleNavBtn = document.getElementById('togglenav')
 const closeBtn = document.querySelectorAll('.close');
 const form = document.querySelector('form');
 const formDataInput = document.querySelectorAll('.formData input')
+const closeValidateBtn = document.querySelectorAll('.btn-close');
 
 // restore form values on page load
 window.onload = restoreFormValues();
@@ -26,12 +27,6 @@ closeBtn.forEach(btn => btn.addEventListener('click', closeModal));
 // submit form event
 form.addEventListener('submit', event => {
     event.preventDefault();
-
-    // reset data errors
-    formData.forEach(element => {
-        element.setAttribute("data-error", "");
-        element.setAttribute("data-error-visible", "false");
-    });
 
     const result = validate();
 

@@ -1,5 +1,5 @@
 const modalbg = document.querySelector('.bground');
-const modalcontent = document.getElementById('content');
+const modalcontent = document.querySelector('.content');
 
 // launch modal form
 export function launchModal () {
@@ -22,9 +22,15 @@ export function displayFormMessage () {
 
     modalMessage.className = "modal-body-flex";
     // texte "Merci pour votre inscription"
-    messageSuccess.className = "modal-success";
-    messageSuccess.innerText = "Merci pour votre inscription";
+    modalSuccess.className = "modal-success";
+    modalSuccess.innerText = "Merci pour votre inscription";
     // bouton "Fermer"
-    modalButton.className = "btn-submit";
+    modalButton.className = "btn-close";
     modalButton.innerText = "Fermer";
+
+    modalcontent.append(modalMessage);
+    modalMessage.append(modalSuccess);
+    modalMessage.append(modalButton);
+
+    modalButton.addEventListener('click', closeModal);
 }
