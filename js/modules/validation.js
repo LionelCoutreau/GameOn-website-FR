@@ -5,8 +5,8 @@ const email = document.getElementById("email");
 const birthdate = document.getElementById("birthdate");
 const quantity = document.getElementById("quantity");
 const location = document.getElementsByName("location");
-const conditions = document.getElementById("conditions");
-const formElements = document.querySelectorAll("formData input");
+const conditions = document.getElementById("checkbox1");
+const formElements = document.querySelectorAll(".formData input");
 //const listElements = ["first", "last", "email", "quantity", "location", "conditions"];
 
 // Validate all form before submit
@@ -16,7 +16,10 @@ export function validate()
 
     // verify all form fields
     formElements.forEach(element => {
-        result = validateElement(element);
+        if(!validateElement(element.getAttribute("name")))
+        {
+            result = false;
+        }
     });
 
     return result;
@@ -114,12 +117,15 @@ function verifyConditions()
 function isLessThanNumberOfChars(element, x)
 {
     let result = true;
-
     const formDataErr = element.parentElement;
+
+    // reset data error
+    formDataErr.setAttribute("data-error", "");
+    formDataErr.setAttribute("data-error-visible", "false");
 
     if(element.value.trim().length < x)
     {
-        formDataErr.setAttribute("data-error", "Veuillez entrer ${x} caractères ou plus pour le champ du nom.");
+        formDataErr.setAttribute("data-error", "Veuillez entrer " + x + " caractères ou plus pour le champ du nom.");
         formDataErr.setAttribute("data-error-visible", "true");
         result = false;
     }
@@ -134,6 +140,10 @@ function isEmailValid(element)
     const validRegex = /^([A-Za-z0-9_\-\.\+])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
     const formDataErr = element.parentElement;
 
+    // reset data error
+    formDataErr.setAttribute("data-error", "");
+    formDataErr.setAttribute("data-error-visible", "false");
+
     if (!element.value.match(validRegex)) {
         formDataErr.setAttribute("data-error", "Veuillez entrer une adresse email valide");
         formDataErr.setAttribute("data-error-visible", "true");
@@ -147,8 +157,12 @@ function isEmailValid(element)
 function isDateValid(element)
 {
     let result = true;
-    const validRegex = /^([0-9]){2}\/([0-9]){2}\/([0-9]{4})$/;
+    const validRegex = /^([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))$/;
     const formDataErr = element.parentElement;
+
+    // reset data error
+    formDataErr.setAttribute("data-error", "");
+    formDataErr.setAttribute("data-error-visible", "false");
 
     if (!element.value.match(validRegex)) {
         formDataErr.setAttribute("data-error", "Veuillez entrer une date valide");
@@ -167,6 +181,10 @@ function isNumeric(element)
     const validRegex = /^([0-9])+$/;
     const formDataErr = element.parentElement;
 
+    // reset data error
+    formDataErr.setAttribute("data-error", "");
+    formDataErr.setAttribute("data-error-visible", "false");
+
     if (!element.value.match(validRegex)) {
         formDataErr.setAttribute("data-error", "Veuillez entrer un nombre compris entre 0 et 99");
         formDataErr.setAttribute("data-error-visible", "true");
@@ -181,7 +199,12 @@ function isOneRadioChecked(elementsGroup)
 {
     let result = true;
     let isOneChecked = false;
+    const formDataErr = elementsGroup[0].parentElement;
 
+    // reset data error
+    formDataErr.setAttribute("data-error", "");
+    formDataErr.setAttribute("data-error-visible", "false");
+    
     elementsGroup.forEach(element => {
         if (element.checked) {
             isOneChecked = true;
@@ -190,7 +213,6 @@ function isOneRadioChecked(elementsGroup)
 
     if(!isOneChecked)
     {
-        const formDataErr = elementsGroup[0].parentElement;
 
         formDataErr.setAttribute("data-error", "Vous devez choisir une option.");
         formDataErr.setAttribute("data-error-visible", "true");
@@ -205,6 +227,10 @@ function isChecked(element)
 {
     let result = true;
     const formDataErr = element.parentElement;
+
+    // reset data error
+    formDataErr.setAttribute("data-error", "");
+    formDataErr.setAttribute("data-error-visible", "false");
 
     if (!element.checked) {
         formDataErr.setAttribute("data-error", "Vous devez vérifier que vous acceptez les termes et conditions.");
