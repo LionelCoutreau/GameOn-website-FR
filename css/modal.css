@@ -474,6 +474,9 @@ input[data-error]::after {
   margin: 0;
   margin-top: 59px;
 }
+.btn-signup-responsive {
+  display:none;
+}
 .hero-img {
   grid-column: span 8;
 }
@@ -526,7 +529,8 @@ footer {
     border-radius: 10px;
     margin-top: 40px;
   }
-  .hero-section > .btn-signup {
+  .hero-section > .btn-signup, .btn-signup-responsive
+  {
     display: block;
     margin: 32px auto 10px;
     padding: 12px 35px;

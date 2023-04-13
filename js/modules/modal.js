@@ -19,6 +19,7 @@ export function displayFormMessage () {
     const modalMessage = document.createElement("div");
     const modalSuccess = document.createElement("div");
     const modalButton = document.createElement("button");
+    const modalClose = document.createElement("span");
 
     modalMessage.className = "modal-body-flex";
     // texte "Merci pour votre inscription"
@@ -27,10 +28,14 @@ export function displayFormMessage () {
     // bouton "Fermer"
     modalButton.className = "btn-close";
     modalButton.innerText = "Fermer";
+    // bouton "X"
+    modalClose.className = "close";
 
+    modalcontent.append(modalClose);
     modalcontent.append(modalMessage);
     modalMessage.append(modalSuccess);
     modalMessage.append(modalButton);
 
     modalButton.addEventListener('click', closeModal);
+    modalClose.addEventListener('click', closeModal);
 }
